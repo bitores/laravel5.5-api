@@ -116,7 +116,7 @@ Route::group(['prefix'=>'/Sys', 'middleware'=>'isAuth'], function(){
     Route::get('log', ['uses'=>'SysController@log']);
     Route::get('log/detail', ['uses'=>'SysController@detailLog']);
     Route::get('ajaxLog', ['as'=>'ajaxLog', 'uses'=>'SysController@ajaxLog']);
-    Route::get('update', ['as'=>'sys.update', 'uses'=>'SysController@update']);
+    // Route::get('update', ['as'=>'sys.update', 'uses'=>'SysController@update']);
 });
 //统计信息
 Route::group(['prefix'=>'/Statistics'], function(){

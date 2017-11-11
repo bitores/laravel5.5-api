@@ -8,13 +8,13 @@
 </div>
 <script type="text/javascript" charset="utf-8">
 //新版本检查
-$.get("/Sys/update",function(res,status){
-	var checkUpdate = $.cookie('checkUpdate',1,{expires:7,path:'/'});
-	if(status=='success' && res.status==200){
-		var version = $(".versionInfo");
-		version.find('label').text(res.message);
-		version.find('a').prop('href', res.data.url);
-		version.find('i').show();
-	}
-});
+// $.get("/Sys/update",function(res,status){
+// 	var checkUpdate = $.cookie('checkUpdate',1,{expires:7,path:'/'});
+// 	if(status=='success' && res.status==200){
+// 		var version = $(".versionInfo");
+// 		version.find('label').text(res.message);
+// 		version.find('a').prop('href', res.data.url);
+// 		version.find('i').show();
+// 	}
+// });
 </script>
