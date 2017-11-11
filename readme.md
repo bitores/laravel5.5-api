@@ -1,53 +1,48 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+项目介绍
+========
+### xApi Manager-哆啦接口管理平台
+XAPI MANAGER -专业实用的开源接口管理平台，为程序开发者提供一个灵活，方便，快捷的API管理工具，让API管理变的更加清晰、明朗
+### 特点
+* 全站基于 Laravel 5.4  + Bootstrap + jQuery +layer3.0开发
+* 开放源代码，开发者可以根据自己的需求自由使用和定制
+* 让开发者更加专注于项目业务和逻辑的实现，及协同开发
+* 支持多项目、多环境管理，支持消息通知及帮助中心
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+### v2.0.1 版本更新说明
 
-## About Laravel
+  1. 更新子分类模板
+  2. 修复Api详情及debug保存路径错误
+  3. 屏蔽空格事件
+  4. 修复手机兼容性问题
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+### v2.0 版本说明
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+v2.0版本进行了一次大的重构，支持了多项目多环境、企业密钥等若干改进和优化，欢迎大家下载使用，如果您在使用中遇到什么问题请及时向我们反馈。同时欢迎大家加入QQ交流群(623709829)，共同探讨一些技术问题、交流一些想法。
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+* 官方地址：http://xapi.smaty.net/ （admin/admin123）
+* 项目部署及配置：http://www.smaty.net/t/xapi-manager (安装和升级请参考手册)
+* 开源图书社区: http://www.smaty.net
 
-## Learning Laravel
+我们的愿景是做最好的接口管理平台，如果您感兴趣，欢迎加入我们的开发团队
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+* 码云地址：https://git.oschina.net/duolatech/xapimanager
+* github地址：https://github.com/duolatech/xApi-Manager
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+项目介绍
+========
+**控制台** 
+<img src="./screenshot/kongzhitai.jpg">
+**多项目设置** 
+<img src="./screenshot/duoxiangmu.jpg">
+**Api列表** 
+<img src="./screenshot/apilist.jpg">
+**Api分类** 
+<img src="./screenshot/fenlei.jpg">
+**Api环境设置** 
+<img src="./screenshot/huanjing.jpg">
+**Api调试**
+<img src="./screenshot/debug.jpg">
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
-
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+最后
+========
+非常欢迎大家贡献代码，让这个项目成长的更好。

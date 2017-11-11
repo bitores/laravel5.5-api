@@ -7,8 +7,6 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
-define('LARAVEL_START', microtime(true));
-
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
@@ -17,11 +15,18 @@ define('LARAVEL_START', microtime(true));
 | Composer provides a convenient, automatically generated class loader for
 | our application. We just need to utilize it! We'll simply require it
 | into the script here so that we don't have to worry about manual
-| loading any of our classes later on. It feels great to relax.
+| loading any of our classes later on. It feels nice to relax.
 |
 */
+//复制env文件
+$path = dirname(dirname(__FILE__));
+$envExamplePath = $path. DIRECTORY_SEPARATOR . '.env.example';
+$envPath = $path. DIRECTORY_SEPARATOR . '.env';
+if(file_exists($envExamplePath) && !file_exists($envPath)){
+	copy($envExamplePath, $envPath);
+}
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../bootstrap/autoload.php';
 
 /*
 |--------------------------------------------------------------------------

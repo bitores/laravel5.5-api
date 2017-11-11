@@ -2,70 +2,115 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use Illuminate\Http\Request;
+use App\Http\Requests\userRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Session;
+use Input, Log;
+use App\Models\User;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
     /**
-     * Where to redirect users after registration.
-     *
-     * @var string
+     * 注册页面
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
+    public function index(){
+        
+        $data = array(
+            'from'  => mt_rand(10,40),
+            'to'    => mt_rand(50, 100)
+        );
+        Session::put('captcha', $data);
+        
+        return view('register',['data'=>$data]);
+        
     }
-
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * 注册用户
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+    public function store(userRequest $request){
+        
+        //验证码检查
+        if (!$this->captcha()){
+            return response()->json(['status'=>4010, 'message'=>'验证码错误']);
+        }
+        //用户检查
+        if($this->isExist()){
+            return response()->json(['status'=>4011, 'message'=>'用户已存在']);
+        }
+        //保存用户信心
+        $id = $this->saveUser($_POST);
+        if($id){
+            return response()->json(['status'=>200, 'message'=>'注册成功，请联系管理员审核']);
+        }else{
+            return response()->json(['status'=>4013, 'message'=>'注册失败，请稍后重试']);
+        }
+           
     }
-
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
+     * 注册时用户信息检查
      */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+    public function check(){
+        
+        $data = array();
+        $field = array('username', 'phone', 'email');
+        foreach ($field as $value){
+            if(!empty($_POST[$value])){
+                $data[$value] = $_POST[$value];
+            }
+        }
+        if(!empty($data)){
+            $info = User::where($data)->first();
+        }
+        $bool = !empty($info) ? false : true;
+        
+        return response()->json($bool);
     }
-}
+    /**
+     * 检查用户是否存在
+     * @return boolean
+     */
+    public function isExist(){
+        
+        $username = Input::get('username');
+        $phone = Input::get('phone');
+        $email = Input::get('email');
+        $info = User::where('username', $username)->orWhere('phone', $phone)->orWhere('email',$email)->first();
+        
+        return !empty($info) ? true : false;
+    }
+    /**
+     * 保存用户信息
+     * @param $post 用户数据
+     * @return 用户id
+     */
+    public function saveUser($post){
+    
+        $user = new User();
+        $user->ctime = time();
+        $user->username = $post['username'];
+        $user->salt = GetRandStr(6);
+        $user->password = md5(md5($post['password']).$user->salt);
+        $user->phone = $post['phone'];
+        $user->email = $post['email'];
+        $user->status = 3; //1在职，2离职，3待激活
+        $user->save();
+    
+        return $user->uid;
+    }
+    /**
+     * 检查验证码是否正确
+     */
+    public function captcha(){
+    
+        $rand = Input::get('rand');
+        $rangeslider = Input::get('rangeslider');
+        $captcha = Session::get('captcha');
+        if(!empty($captcha) && $rand>=0 && $rand<=100){
+            if($rangeslider==md5($captcha['from'].'#'.$captcha['to'])){
+                return true;
+            }
+        }
+        return false;
+    }
+}   
