@@ -155,3 +155,38 @@ issue处理
 
 
 
+**[Laravel API文档生成](https://github.com/mpociot/laravel-apidoc-generator)**
+
+To generate your API documentation, use the api:generate artisan command.  eg.
+
+
+```
+// API Group Routes
+Route::group(array('prefix' => 'api/v1', 'middleware' => []), function () {
+	// Custom route added to standard Resource
+	Route::get('example/foo', 'ExampleController@foo');
+	// Standard Resource route
+	Route::resource('example', 'ExampleController');
+});
+
+
+// api:generate Commnad
+php artisan api:generate --routePrefix="api/v1/*"
+```
+
+Available command options:
+
+| Option                | Description                              |
+| --------------------- | ---------------------------------------- |
+| `output`              | The output path used for the generated documentation. Default: `public/docs` |
+| `routePrefix`         | The route prefix to use for generation - `*` can be used as a wildcard |
+| `routes`              | The route names to use for generation - Required if no routePrefix is provided |
+| `middleware`          | The middlewares to use for generation    |
+| `noResponseCalls`     | Disable API response calls               |
+| `noPostmanCollection` | Disable Postman collection creation      |
+| `useMiddlewares`      | Use all configured route middlewares (Needed for Laravel 5.3 `SubstituteBindings` middleware) |
+| `actAsUserId`         | The user ID to use for authenticated API response calls |
+| `router`              | The router to use, when processing the route files (can be Laravel or Dingo - defaults to Laravel) |
+| `bindings`            | List of route bindings that should be replaced when trying to retrieve route results. Syntax format: `binding_one,id |
+| `force`               | Force the re-generation of existing/modified API routes |
+| `header`              | Custom HTTP headers to add to the example requests. Separate the header name and value with ":". For example: `--header 'Authorization: CustomToken'` |
